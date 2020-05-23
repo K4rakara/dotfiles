@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	if (argc >= 1)
+	if (argc >= 2)
 	{
 		for (int i = 0; i < argc; i++)
 		{
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 			<< "Fcat\n"
 			<< "Quick and dirty file concatenation.\n"
 			<< "\n"
-			<< "Simply pass file names to this program and they will be outputted to stdout.";
+			<< "Simply pass file names to this program and they will be outputted to stdout.\n";
 	}
 	return 0;
 }
