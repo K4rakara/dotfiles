@@ -30,9 +30,11 @@ int main(int argc, char* argv[])
 	{
 		cout
 			<< "Fcat\n"
+			<< "===\n"
 			<< "Quick and dirty file concatenation.\n"
-			<< "\n"
-			<< "Simply pass file names to this program and they will be outputted to stdout.\n";
+			<< "Simply pass file names to this program and they will be outputted to stdout.\n"
+			<< "Liscensed under the MIT liscense.\n"
+			<< "Source availible at https://github.com/K4rakara/mini-utils.\n";
 	}
 	return 0;
 }
