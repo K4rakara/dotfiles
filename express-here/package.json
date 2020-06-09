@@ -1,0 +1,20 @@
+{
+  "name": "express-here",
+  "version": "1.0.0",
+  "description": "A CLI tool for starting a static express webserver in the current directory.",
+  "main": "index.js",
+  "author": "Jack Johannesen",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.12",
+    "@types/ora": "^3.2.0",
+    "babel-minify": "^0.5.1",
+    "browserify": "^16.5.1",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "ora": "^4.0.4"
+  }
+}
