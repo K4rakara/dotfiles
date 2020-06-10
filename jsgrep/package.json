@@ -1,0 +1,14 @@
+{
+  "name": "jsgrep",
+  "version": "1.0.0",
+  "description": "Grep, but it accepts a JavaScript regular expression.",
+  "main": "index.js",
+  "repository": "https://github.com/K4rakara/mini-utils",
+  "author": "Jack Johannesen",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.13",
+    "babel-minify": "^0.5.1",
+    "typescript": "^3.9.5"
+  }
+}
