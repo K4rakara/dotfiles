@@ -2,8 +2,8 @@
 # Maintainer: Jack Johannesen
 
 pkgname=jsgrep
-pkgver=0.0.3
-pkgrel=2
+pkgver=0.0.4
+pkgrel=3
 pkgdesc="Grep, but JavaScript."
 arch=('i686' 'x86_64' 'x64')
 url="https://github.com/K4rakara/dotfiles"

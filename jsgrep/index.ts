@@ -7,7 +7,7 @@ const indent: string = clml`\r<forward ${((process.stdout.isTTY) ? Math.round(pr
 
 const help: string =
 clml`
-<:mag:> <yellow>js<reset>grep <bold>v0.0.3<reset>
+<:mag:> <yellow>js<reset>grep <bold>v0.0.4<reset>
 
 <bold>Usage:<reset>
 
