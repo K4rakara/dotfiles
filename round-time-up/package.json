@@ -1,0 +1,12 @@
+{
+  "name": "round-time-up",
+  "version": "1.0.0",
+  "description": "Pipe a time formatted as hh:mm:ss.ms and this tool will round it to the nearest second.",
+  "main": "index.js",
+  "repository": "https://github.com/K4rakara/dotfiles",
+  "author": "Jack Johannesen",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-minify": "^0.5.1"
+  }
+}
