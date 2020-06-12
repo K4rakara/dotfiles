@@ -1,0 +1,29 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=jsgrep
+pkgver=0.0.2
+pkgrel=1
+pkgdesc="Grep, but JavaScript."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('nodejs')
+makedepends=('make' 'yarn' 'nodejs')
+provides=('jsgrep')
+source=("git://github.com/K4rakara/dotfiles.git")
+md5sums=('SKIP')
+
+build() {
+	cd dotfiles/jsgrep
+	yarn install
+	make
+}
+
+package() {
+	cd $srcdir/dotfiles/jsgrep
+	mkdir -p $pkgdir/usr/bin/
+	cp ./jsgrep $pkgdir/usr/bin/
+	chown root:root $pkgdir/usr/bin/jsgrep
+	chmod a+x $pkgdir/usr/bin/jsgrep
+}
