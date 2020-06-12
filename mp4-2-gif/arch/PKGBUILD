@@ -1,0 +1,28 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=mp4-2-gif
+pkgver=0.0.2
+pkgrel=1
+pkgdesc="Convert any .mp4 to a .gif with ease."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('jsgrep' 'round-time-up')
+makedepends=('make' 'yarn' 'nodejs')
+provides=('mp4-2-gif')
+source=("git://github.com/K4rakara/dotfiles.git")
+md5sums=('SKIP')
+
+build() {
+	cd dotfiles/mp4-2-gif
+	rename mp4-2-gif.sh mp4-2-gif ./mp4-2-gif.sh
+}
+
+package() {
+	cd $srcdir/dotfiles/mp4-2-gif
+	mkdir -p $pkgdir/usr/bin/
+	cp ./mp4-2-gif $pkgdir/usr/bin/
+	chown root:root $pkgdir/usr/bin/mp4-2-gif
+	chmod a+x $pkgdir/usr/bin/mp4-2-gif
+}
