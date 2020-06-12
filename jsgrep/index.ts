@@ -3,7 +3,7 @@ import path from 'path';
 import yargs from 'yargs';
 import clml from 'clml';
 
-const indent: string = clml`\r<forward ${Math.round(process.stdout.getWindowSize()[0] * (12.5/100)).toString()}>`;
+const indent: string = clml`\r<forward ${((process.stdout.isTTY) ? Math.round(process.stdout.getWindowSize()[0] * (12.5/100)).toString() : '25')}>`;
 
 const help: string =
 clml`
