@@ -11,7 +11,7 @@ mp4-2-gif [input file.mp4] [output file.gif]
 
 if [ "$1" != "" ]
 then
-	if ["$2" != ""]
+	if [ "$2" != "" ]
 	then
 		ffmpeg \
 			-i `echo $1` \
