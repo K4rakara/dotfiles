@@ -1,21 +1,238 @@
-import process from 'process';
+import fs from 'fs';
+import path from 'path';
+import yargs from 'yargs';
+import clml from 'clml';
 
-if (process.argv[2] != null)
+const indent: string = clml`\r<forward ${Math.round(process.stdout.getWindowSize()[0] * (12.5/100)).toString()}>`;
+
+const help: string =
+clml`
+<:mag:> <yellow>js<reset>grep <bold>v0.0.2<reset>
+
+<bold>Usage:<reset>
+
+jsgrep [options] regexp [files]
+
+<bold>Options:<reset>
+
+⚬ --help, -h ${indent}: Display this help text and exit.
+⚬ --invert-match, -v${indent}: Select non-matching lines.
+⚬ --flags, f ...${indent}: Specify flags for the regexp to use.
+⚬ --color ...${indent}: Set the display color. Defaults to red. Acceptable values are:
+<forward 5>⚬ black
+<forward 5>⚬ blue
+<forward 5>⚬ cyan
+<forward 5>⚬ green
+<forward 5>⚬ magenta
+<forward 5>⚬ red
+<forward 5>⚬ white
+<forward 5>⚬ yellow
+`;
+
+const argv = yargs
+	.boolean('h')
+	.alias('h', 'help')
+	.string('color')
+	.boolean('v')
+	.alias('v', 'invert-match')
+	.string('f')
+	.alias('f', 'flags')
+	.boolean('o')
+	.alias('o', 'only-matching')
+	.help(false)
+	.argv;
+
+function readDirRecursive(dir: string): string[]
 {
-	let input: string = '';
-	let flags: string = '';
-	if (process.argv[3] != null) flags = process.argv[3];
-
-	const stdin: NodeJS.Socket = process.openStdin();
-
-	stdin.on('data', (chunk: string): void =>
-		{ input += chunk; });
-
-	stdin.on('end', (): void =>
+	const toReturn: string[] = [];
+	const directChildren: string[] = fs.readdirSync(dir, 'utf8');
+	directChildren.forEach((child: string): void =>
 	{
-		const regExp: RegExp = new RegExp(process.argv[2], flags);
-		const matches: RegExpMatchArray|null = regExp.exec(input);
-		if (matches != null) matches.forEach((match: string): void => console.log(match));
-		process.exit();
+		let isDir: boolean = false;
+		try { fs.readFileSync(path.join(dir, child), 'utf8'); }
+		catch { isDir = true }
+		if (!isDir)
+			toReturn.push(path.join(dir, child));
+		else
+			toReturn.push(...readDirRecursive(path.join(dir, child)));
 	});
+	return toReturn;
 }
+
+if (argv._.length >= 1)
+{
+	if (argv.h != null && argv.h) { console.log(help); process.exit(); }
+	if (process.stdin.isTTY)
+	{
+		const regexp: RegExp = new RegExp(argv._[0], argv.f || '');
+
+		if (argv._[1] != null)
+		{
+			argv._.forEach((arg: string, i: number): void =>
+			{
+				if (i >= 1)
+				{
+					let isDir: boolean = false;
+					try { fs.readFileSync(path.join(process.cwd(), arg), 'utf-8'); }
+					catch { isDir = true; }
+
+					if (!isDir)
+					{
+						const input: string = fs.readFileSync(path.join(process.cwd(), arg), 'utf8');
+
+						const prefix: string = ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+							? clml`<magenta>${arg}<reset><blue>:<reset> `
+							: `${arg}: `;
+
+						let output: string = '';
+
+						input.split(/\n/gmi).forEach((line: string, i: number): void =>
+						{
+							const matches: RegExpMatchArray|null = regexp.exec(line);
+
+							if (!argv.v)
+								if (matches != null)
+									if (argv.o)
+										output 
+											+= ((output !== '') ? '\n': '')
+											+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+											+ ((!(argv.o != null)
+												? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+													? clml`<blue>${i.toString()}<reset>: `
+													: `${i.toString()}: `
+												: '')) 
+											+ matches[0];
+									else
+										output
+											+= ((output !== '') ? '\n': '')
+											+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+											+ ((!(argv.o != null)
+												? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+													? clml`<blue>${i.toString()}<reset>: `
+													: `${i.toString()}: `
+												: '')) 
+											+ line.replace(matches[0], clml`${
+												((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+													? `<${argv.color || 'red'}>${matches[0]}<reset>`
+													: matches[0]
+											}`);
+								else;
+							else if (!(matches != null))
+								output
+									+= ((output !== '') ? '\n': '')
+									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+									+ ((!(argv.o != null)
+										? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+											? clml`<blue>${i.toString()}<reset>: `
+											: `${i.toString()}: `
+										: '')) 
+									+ line;
+						});
+
+						if (output !== '') console.log(output);
+					}
+				}
+			});
+		}
+		else
+		{
+			const inputFiles: string[] = readDirRecursive(process.cwd());
+			inputFiles.forEach((inputFile: string): void =>
+			{
+				const input: string = fs.readFileSync(inputFile, 'utf8');
+
+				const prefix: string = ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+					? clml`<magenta>${inputFile}<reset><blue>:<reset> `
+					: `${inputFile}: `;
+
+				let output: string = '';
+
+				input.split(/\n/gmi).forEach((line: string, i: number): void =>
+				{
+					const matches: RegExpMatchArray|null = regexp.exec(line);
+
+					if (!argv.v)
+						if (matches != null)
+							if (argv.o)
+								output 
+									+= ((output !== '') ? '\n': '')
+									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+									+ ((!(argv.o != null)
+										? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+											? clml`<blue>${i.toString()}<reset>: `
+											: `${i.toString()}: `
+										: '')) 
+									+ matches[0];
+							else
+								output
+									+= ((output !== '') ? '\n': '')
+									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+									+ ((!(argv.o != null)
+										? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+											? clml`<blue>${i.toString()}<reset>: `
+											: `${i.toString()}: `
+										: '')) 
+									+ line.replace(matches[0], clml`${
+										((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+											? `<${argv.color || 'red'}>${matches[0]}<reset>`
+											: matches[0]
+									}`);
+						else;
+					else if (!(matches != null))
+						output
+							+= ((output !== '') ? '\n': '')
+							+ ((!(argv.o != null) || !argv.o) ? prefix : '')
+							+ ((!(argv.o != null)
+								? ((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+									? clml`<blue>${i.toString()}<reset>: `
+									: `${i.toString()}: `
+								: '')) 
+							+ line;
+				});
+
+				if (output !== '') console.log(output);
+			});
+		}
+	}
+	else
+	{
+		let input: string = '';
+		
+		const stdin: NodeJS.Socket = process.openStdin();
+
+		stdin.on('data', (chunk: string): void => { input += chunk; });
+
+		stdin.on('end', (): void =>
+		{
+			const regexp: RegExp = new RegExp(argv._[0], argv.f || '');
+			
+			let output: string = '';
+
+			input.split(/\n/gmi).forEach((line: string): void =>
+			{
+				const matches: RegExpMatchArray|null = regexp.exec(line);
+
+				if (!argv.v)
+					if (matches != null)
+						if (argv.o)
+							output += ((output !== '') ? '\n': '') + matches[0];
+						else
+							output += ((output !== '') ? '\n': '') + line.replace(matches[0], clml`${
+								((argv.color != null && argv.color !== 'none') || !(argv.color != null))
+									? `<${argv.color || 'red'}>${matches[0]}<reset>`
+									: matches[0]
+							}`);
+					else;
+				else if (!(matches != null))
+					output
+						+= ((output !== '') ? '\n': '')
+						+ line;
+			});
+
+			if (output !== '') console.log(output);
+
+			process.exit();
+		});
+	}
+}
+else console.log(help);
