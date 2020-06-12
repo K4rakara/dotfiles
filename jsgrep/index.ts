@@ -16,8 +16,9 @@ jsgrep [options] regexp [files]
 <bold>Options:<reset>
 
 ⚬ --help, -h ${indent}: Display this help text and exit.
-⚬ --invert-match, -v${indent}: Select non-matching lines.
 ⚬ --flags, f ...${indent}: Specify flags for the regexp to use.
+⚬ --invert-match, -v${indent}: Select non-matching lines.
+⚬ --max-count, -m ...${indent}: Stop after a given number of matches.
 ⚬ --color ...${indent}: Set the display color. Defaults to red. Acceptable values are:
 <forward 5>⚬ black
 <forward 5>⚬ blue
@@ -39,6 +40,8 @@ const argv = yargs
 	.alias('f', 'flags')
 	.boolean('o')
 	.alias('o', 'only-matching')
+	.number('m')
+	.alias('m', 'max-count')
 	.help(false)
 	.argv;
 
@@ -62,6 +65,8 @@ function readDirRecursive(dir: string): string[]
 if (argv._.length >= 1)
 {
 	if (argv.h != null && argv.h) { console.log(help); process.exit(); }
+	let count: number = 0;
+	const maybeExit = (output: string): void => { if (argv.m != null) if (count >= argv.m) { console.log(output); process.exit(); } };
 	if (process.stdin.isTTY)
 	{
 		const regexp: RegExp = new RegExp(argv._[0], argv.f || '');
@@ -93,6 +98,7 @@ if (argv._.length >= 1)
 							if (!argv.v)
 								if (matches != null)
 									if (argv.o)
+									{
 										output 
 											+= ((output !== '') ? '\n': '')
 											+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -102,7 +108,11 @@ if (argv._.length >= 1)
 													: `${i.toString()}: `
 												: '')) 
 											+ matches[0];
+										count++;
+										maybeExit(output);
+									}
 									else
+									{
 										output
 											+= ((output !== '') ? '\n': '')
 											+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -116,8 +126,12 @@ if (argv._.length >= 1)
 													? `<${argv.color || 'red'}>${matches[0]}<reset>`
 													: matches[0]
 											}`);
+										count++;
+										maybeExit(output);
+									}
 								else;
 							else if (!(matches != null))
+							{
 								output
 									+= ((output !== '') ? '\n': '')
 									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -127,6 +141,9 @@ if (argv._.length >= 1)
 											: `${i.toString()}: `
 										: '')) 
 									+ line;
+								count++;
+								maybeExit(output);
+							}
 						});
 
 						if (output !== '') console.log(output);
@@ -154,6 +171,7 @@ if (argv._.length >= 1)
 					if (!argv.v)
 						if (matches != null)
 							if (argv.o)
+							{
 								output 
 									+= ((output !== '') ? '\n': '')
 									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -163,7 +181,11 @@ if (argv._.length >= 1)
 											: `${i.toString()}: `
 										: '')) 
 									+ matches[0];
+								count++;
+								maybeExit(output);
+							}
 							else
+							{
 								output
 									+= ((output !== '') ? '\n': '')
 									+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -177,8 +199,12 @@ if (argv._.length >= 1)
 											? `<${argv.color || 'red'}>${matches[0]}<reset>`
 											: matches[0]
 									}`);
+								count++;
+								maybeExit(output);
+							}
 						else;
 					else if (!(matches != null))
+					{
 						output
 							+= ((output !== '') ? '\n': '')
 							+ ((!(argv.o != null) || !argv.o) ? prefix : '')
@@ -188,6 +214,9 @@ if (argv._.length >= 1)
 									: `${i.toString()}: `
 								: '')) 
 							+ line;
+						count++;
+						maybeExit(output);
+					}
 				});
 
 				if (output !== '') console.log(output);
@@ -215,18 +244,30 @@ if (argv._.length >= 1)
 				if (!argv.v)
 					if (matches != null)
 						if (argv.o)
+						{
 							output += ((output !== '') ? '\n': '') + matches[0];
+							count++;
+							maybeExit(output);
+						}
 						else
+						{
 							output += ((output !== '') ? '\n': '') + line.replace(matches[0], clml`${
 								((argv.color != null && argv.color !== 'none') || !(argv.color != null))
 									? `<${argv.color || 'red'}>${matches[0]}<reset>`
 									: matches[0]
 							}`);
+							count++;
+							maybeExit(output);
+						}
 					else;
 				else if (!(matches != null))
+				{
 					output
 						+= ((output !== '') ? '\n': '')
 						+ line;
+					count++;
+					maybeExit(output);
+				}
 			});
 
 			if (output !== '') console.log(output);
