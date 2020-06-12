@@ -15,10 +15,10 @@ then
 	then
 		ffmpeg \
 			-i `echo $1` \
-			-r `mediainfo --fullscan $1 | jsgrep -o --color=none "(?<=Frame count                              : )\d+"` \
+			-r `mediainfo --fullscan $1 | jsgrep -o --color=none -m 1 "(?<=Frame count                              : )\d+"` \
 			-vf "scale=`mediainfo --fullscan $1 | jsgrep -o --color=none "(?<=Height                                   : )\d+(?= pixels)"`:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
 			-ss 00:00:00 -to `mediainfo --fullscan $1 | jsgrep -o --color=none "(?<=Duration                                 : )\d\d:\d\d:\d\d.\d+" | round-time-up` \
-			$2		
+			$2
 	else
 		printHelp
 	fi
