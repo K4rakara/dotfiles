@@ -2,7 +2,7 @@
 # Maintainer: Jack Johannesen
 
 pkgname=mp4-2-gif
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="Convert any .mp4 to a .gif with ease."
 arch=('i686' 'x86_64' 'x64')

@@ -6,7 +6,7 @@ duration="00:00:00"
 
 printHelp() {
 echo "
-mp4-2-gif v0.0.1
+mp4-2-gif v0.0.2
 
 Usage:
 
