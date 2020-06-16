@@ -1,0 +1,28 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=2gif
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Convert videos to .gif with ease."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('jsgrep' 'round-time-up' 'mediainfo' 'ffmpeg' 'ruby')
+makedepends=('make')
+provides=('2gif')
+source=("git://github.com/K4rakara/dotfiles.git")
+md5sums=('SKIP')
+
+build() {
+	cd dotfiles/2gif
+	make
+}
+
+package() {
+	cd $srcdir/dotfiles/2gif
+	mkdir -p $pkgdir/usr/bin/
+	cp ./2gif $pkgdir/usr/bin/
+	chown root:root $pkgdir/usr/bin/2gif
+	chmod a+x $pkgdir/usr/bin/2gif
+}
