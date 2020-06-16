@@ -102,6 +102,7 @@ ARGV.each do |arg|
 						# Set the argument to be parsed on the next pass.
 						$arg_mode = $argument_types[""<<no_prefix]
 						$arg_target = no_prefix
+						if $arg_mode == "default" then $arguments[""<<no_prefix] = true end
 					else
 						# Error b/c of an unexpected argument and display help.
 						print "Error: Unexpected argument \""<<no_prefix<<"\".\n"
@@ -146,6 +147,7 @@ ARGV.each do |arg|
 							# Set the argument to be parsed on the next pass.
 							$arg_mode = $argument_types[""<<no_prefix]
 							$arg_target = no_prefix
+							if $arg_mode == "default" then $arguments[""<<no_prefix] = true end
 						else
 							# Error and exit. (Should not occur.)
 							print "Error: Internal error 002. Please report this issue.\n"
