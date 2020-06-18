@@ -21,6 +21,9 @@ d | b | B, 1 or more times.
 - B : Inserts a random base 64 value as part of the prefix.]]
 end
 
+--Set the random seed based on system time
+math.randomseed(os.time())
+
 local base64 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 function string.split(str, by)
