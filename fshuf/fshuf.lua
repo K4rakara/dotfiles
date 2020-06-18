@@ -1,6 +1,6 @@
 #!/usr/bin/lua
 function printHelp()
-print [[Fshuf 1.0
+print [[Fshuf 1.1
 ========================
 
 Shuffles and un-shuffles files by appending and removing prefixes.
