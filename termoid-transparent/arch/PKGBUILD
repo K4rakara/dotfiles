@@ -1,0 +1,26 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=termoid-transparent
+pkgver=0.0.3
+pkgrel=1
+pkgdesc="qmltermwidget but with no background."
+arch=('i686' 'x86_64')
+url="https://github.com/K4rakara/termoid-transparent"
+license=('MIT')
+depends=('qmltermwidget-transparent')
+makedepends=('git')
+provides=('termoid-transparent')
+source=("git://github.com/K4rakara/termoid-transparent.git")
+md5sums=('SKIP')
+
+build() {
+	cd termoid-transparent
+	./build
+}
+
+package() {
+	cd termoid-transparent
+	mkdir -p $pkgdir/usr/share/plasma/plasmoids/
+	kpackagetool5 -t Plasma/Applet -i package -p $pkgdir/usr/share/plasma/plasmoids/
+}

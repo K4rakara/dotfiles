@@ -1,0 +1,29 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=qmltermwidget-transparent
+pkgver=0.0.3
+pkgrel=1
+pkgdesc="qmltermwidget but with no background."
+arch=('i686' 'x86_64')
+url="https://github.com/K4rakara/qmltermwidget-transparent"
+license=('MIT')
+depends=('qt5-declarative')
+makedepends=('git' 'qt5-tools' 'nodejs')
+provides=('qmltermwidget-transparent')
+source=("git://github.com/K4rakara/qmltermwidget-transparent.git")
+md5sums=('SKIP')
+
+build() {
+	cd qmltermwidget-transparent
+	qmake
+	chmod a+x ./fix-makefile.js
+	./fix-makefile.js
+	make
+}
+
+package() {
+	mkdir -p $pkgdir/usr/bin/
+	cd qmltermwidget-transparent
+	make INSTALL_ROOT="$pkgdir" install
+}
