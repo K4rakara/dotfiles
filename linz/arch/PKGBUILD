@@ -21,7 +21,7 @@ build() {
 
 package() {
 	mkdir -p $pkgdir/usr/bin/
-	cp $srcdir/dotfiles/linz $pkgdir/usr/bin/
+	cp $srcdir/dotfiles/linz/linz $pkgdir/usr/bin/
 	chown root:root $pkgdir/usr/bin/linz
-	chmod a+z $pkgdir/usr/bin/linz
+	chmod a+x $pkgdir/usr/bin/linz
 }
