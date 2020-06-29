@@ -1,0 +1,27 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=linz
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Count up the number of lines of code in the current directory with ease."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('nodejs')
+makedepends=('make' 'yarn' 'nodejs')
+provides=('linz')
+source=("git://github.com/K4rakara/dotfiles.git")
+md5sums=('SKIP')
+
+build() {
+	cd dotfiles/linz
+	make
+}
+
+package() {
+	mkdir -p $pkgdir/usr/bin/
+	cp $srcdir/dotfiles/linz $pkgdir/usr/bin/
+	chown root:root $pkgdir/usr/bin/linz
+	chmod a+z $pkgdir/usr/bin/linz
+}
