@@ -1,13 +1,20 @@
-# Linz
+# :memo: linz
 
-A tool for counting up the total lines of code in the current directory.
+Count up the number of lines of code in the current directory with ease.
 
-### Usage:
+### *Usage:*
 
-`linz formats`
+`linz [options]`
 
-Where formats is multiple arguments consisting of file formats to include in the count.
+### *Options:*
+- `+ext:...`: Include files with the provided extension.
+- `-ext:...`: Don't include files with the provided extension.
+- `+file:...`: Include files with the provided name.
+- `-file:...`: Don't include files with the provided name.
+- `+dir:...`: Include files from the provided directory.
+- `-dir:...`: Don't include files from the provided directory.
 
-### Example:
+### *Example:*
 
-`linz ts tsx scss`
+`linz +ext:ts +ext:tsx -dir:node_modules`
+
