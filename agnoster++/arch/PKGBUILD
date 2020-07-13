@@ -1,0 +1,24 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=agnoster++
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="An improved version of the Agnoster ZSH theme with high customizability."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/agnosterpp-zsh-theme"
+license=('MIT')
+depends=('zsh' 'powerline-fonts')
+makedepends=()
+provides=()
+source=("git://github.com/K4rakara/agnosterpp-zsh-theme.git")
+md5sums=('SKIP')
+
+build() {
+	echo "ummmmm" > /dev/null
+}
+
+package() {
+	mkdir -p $pkgdir/usr/share/zsh/themes/
+	cp $srcdir/agnosterpp-zsh-theme/agnoster++.zsh-theme $pkgdir/usr/share/zsh/themes/
+}
