@@ -1,0 +1,25 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=nano-desktop-entry
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Provides a desktop entry that opens nano."
+arch=('i686' 'x86_64' 'x64')
+license=('MIT')
+depends=('nano')
+makedepends=()
+provides=()
+md5sums=()
+
+build() { printf ""; }
+
+package() {
+	# Make directories in $pkgdir.
+	mkdir -p $pkgdir/usr/share/applications/;
+	mkdir -p $pkgdir/usr/share/pixmaps/;
+	# Copy files into $pkgdir.
+	cp $srcdir/../gnu-nano.desktop $pkgdir/usr/share/applications/;
+	cp $srcdir/../gnu-nano.png $pkgdir/usr/share/pixmaps/;
+}
+
