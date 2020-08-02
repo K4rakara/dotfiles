@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=GNU Nano
+Comment=The classic text editor.
+Exec=/usr/bin/alacritty -e "nano"
+Icon=gnu-nano
+Type=Application
+Categories=Development;Utility;
