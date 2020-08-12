@@ -2,27 +2,25 @@
 # Maintainer: Jack Johannesen
 
 pkgname=fshuf
-pkgver=0.0.2
-pkgrel=1
+pkgver=2.0.0
+pkgrel=2
 pkgdesc="Shuffles files in a directory by adding, modifying, or removing a prefix."
 arch=('i686' 'x86_64' 'x64')
 url="https://github.com/K4rakara/dotfiles"
 license=('MIT')
-depends=('lua')
-makedepends=('make' 'lua')
+depends=()
+makedepends=('cargo')
 provides=('fshuf')
-source=("git://github.com/K4rakara/dotfiles.git")
-md5sums=('SKIP')
+source=()
+md5sums=()
 
 build() {
-	cd dotfiles/fshuf
-	make
+	cargo build --release;
 }
 
 package() {
-	cd $srcdir/dotfiles/fshuf
-	mkdir -p $pkgdir/usr/bin/
-	cp ./fshuf $pkgdir/usr/bin/
-	chown root:root $pkgdir/usr/bin/fshuf
-	chmod a+x $pkgdir/usr/bin/fshuf
+	mkdir -p $pkgdir/usr/bin/;
+	cp $srcdir/../../target/release/fshuf $pkgdir/usr/bin/;
+	chown root:root $pkgdir/usr/bin/fshuf;
+	chmod a+x $pkgdir/usr/bin/fshuf;
 }
