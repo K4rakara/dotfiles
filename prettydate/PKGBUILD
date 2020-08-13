@@ -1,0 +1,26 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=prettydate
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Outputs a pretty date. No bs."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('lua' 'fmnth')
+makedepends=()
+provides=('prettydate')
+source=()
+md5sums=()
+
+build() {
+	echo "Hello" > /dev/null;
+}
+
+package() {
+	mkdir -p $pkgdir/usr/bin;
+	cp $srcdir/../prettydate $pkgdir/usr/bin/;
+	chown root:root $pkgdir/usr/bin/prettydate;
+	chmod a+x $pkgdir/usr/bin/prettydate;
+}

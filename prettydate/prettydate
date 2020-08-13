@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+# Prettydate -- a simple, good looking date string.
+
+d="";
+case "$(date +%w)" in
+  0 ) d="Sunday"   ;;
+  1 ) d="Monday"   ;;
+  2 ) d="Tuesday"  ;;
+  3 ) d="Wednesday";;
+  4 ) d="Thursday" ;;
+  5 ) d="Friday"   ;;
+  6 ) d="Saturday" ;;
+esac;
+
+m="";
+case "$(date +%m)" in
+  01 ) m="January"   ;;
+  02 ) m="Febuary"   ;;
+  03 ) m="March"     ;;
+  04 ) m="April"     ;;
+  05 ) m="May"       ;;
+  06 ) m="June"      ;;
+  07 ) m="July"      ;;
+  08 ) m="August"    ;;
+  09 ) m="September" ;;
+  10 ) m="October"   ;;
+  11 ) m="December"  ;;
+esac;
+
+D="$(date +%d)";
+
+echo "$d, $m $(fmnth $D), $(date +%Y)";
