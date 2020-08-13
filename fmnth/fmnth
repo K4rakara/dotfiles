@@ -1,0 +1,42 @@
+#!/usr/bin/lua
+-- Fmnth : Formats numbers passed to it.
+
+function string.endsWith(str, ending)
+  return ending == "" or str:sub(-#ending) == ending
+end
+
+for i=1,#arg do
+  local asNumber = tonumber(arg[i])
+  if asNumber ~= nil then
+    local suffix = ""
+    if asNumber <= 100 then
+      if asNumber <= 20 then
+        if asNumber == 1 then suffix = "st"
+        elseif asNumber == 2 then suffix = "nd"
+        elseif asNumber == 3 then suffix = "rd"
+        else suffix = "th" end
+      else
+        local asString = tostring(asNumber)
+        if string.endsWith(asString, "1") then suffix = "st"
+        elseif string.endsWith(asString, "2") then suffix = "nd"
+        elseif string.endsWith(asString, "3") then suffix = "rd"
+        else suffix = "th" end
+      end
+    else
+      local asNumber = tonumber((tostring(asNumber)):sub(-2, -1))
+      if asNumber <= 20 then
+        if asNumber == 1 then suffix = "st"
+        elseif asNumber == 2 then suffix = "nd"
+        elseif asNumber == 3 then suffix = "rd"
+        else suffix = "th" end
+      else
+        local asString = tostring(asNumber)
+        if string.endsWith(asString, "1") then suffix = "st"
+        elseif string.endsWith(asString, "2") then suffix = "nd"
+        elseif string.endsWith(asString, "3") then suffix = "rd"
+        else suffix = "th" end
+      end
+    end
+    print(""..arg[i]..suffix)
+  end
+end

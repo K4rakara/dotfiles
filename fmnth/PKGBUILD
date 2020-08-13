@@ -1,0 +1,26 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=fmnth
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Formats numbers. IE: 1rst, 2nd, 3rd."
+arch=('i686' 'x86_64' 'x64')
+url="https://github.com/K4rakara/dotfiles"
+license=('MIT')
+depends=('lua')
+makedepends=()
+provides=('fmnth')
+source=()
+md5sums=()
+
+build() {
+	echo "Hello" > /dev/null;
+}
+
+package() {
+	mkdir -p $pkgdir/usr/bin;
+	cp $srcdir/../fmnth $pkgdir/usr/bin/;
+	chown root:root $pkgdir/usr/bin/fmnth;
+	chmod a+x $pkgdir/usr/bin/fmnth;
+}
