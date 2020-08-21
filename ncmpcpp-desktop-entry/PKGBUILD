@@ -1,0 +1,25 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=ncmpcpp-desktop-entry
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Provides a desktop entry that opens ncmpcpp."
+arch=('i686' 'x86_64' 'x64')
+license=('MIT')
+depends=('ncmpcpp')
+makedepends=()
+provides=()
+md5sums=()
+
+build() { printf ""; }
+
+package() {
+	# Make directories in $pkgdir.
+	mkdir -p $pkgdir/usr/share/applications/;
+	mkdir -p $pkgdir/usr/share/pixmaps/;
+	# Copy files to $pkgdir.
+	cp $srcdir/../ncmpcpp.desktop $pkgdir/usr/share/applications/;
+	cp $srcdir/../ncmpcpp.png $pkgdir/usr/share/pixmaps/;
+}
+

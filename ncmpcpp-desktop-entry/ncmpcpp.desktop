@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=ncmpcpp
+Comment=That one MPD client.
+Exec=ncmpcpp
+Icon=ncmpcpp
+Type=Application
+Categories=AudioVideo;Audio;
+Terminal=true
