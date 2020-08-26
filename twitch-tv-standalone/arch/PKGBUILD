@@ -1,0 +1,50 @@
+
+# Maintainer: Jack Johannesen
+
+pkgname=twitch-tv-standalone
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Provides a standalone Twitch.tv experience for Linux."
+arch=('i686' 'x86_64' 'x64')
+license=('MIT')
+depends=('electron7')
+makedepends=('yarn' 'nodejs')
+provides=('twitch')
+md5sums=()
+
+build() {
+	cd $srcdir/../../;
+	yarn install;
+	yarn electron-builder -l dir;
+}
+
+package() {
+	# Make directories in $pkgdir.
+	mkdir -p $pkgdir/usr/bin/;
+	mkdir -p $pkgdir/usr/share/twitch-tv-standalone/;
+	mkdir -p $pkgdir/usr/share/applications/;
+	mkdir -p $pkgdir/usr/share/pixmaps/;
+
+	# Copy files into $pkgdir.
+	cp -r \
+		$srcdir/../../dist/linux-unpacked/* \
+		$pkgdir/usr/share/twitch-tv-standalone/;
+		
+	ln -s \
+		/usr/share/twitch-tv-standalone/twitch-tv-standalone \
+		$pkgdir/usr/bin/twitch;
+
+	cp \
+		$srcdir/../../twitch.desktop \
+		$pkgdir/usr/share/applications/;
+
+	cp \
+		$srcdir/../../twitch.png \
+		$pkgdir/usr/share/pixmaps/;
+}
+
+post_install() {
+	rm -rf $srcdir/../../node_modules/;
+	rm -rf $srcdir/../../dist/;
+}
+

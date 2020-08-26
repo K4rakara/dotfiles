@@ -1,0 +1,21 @@
+{
+  "name": "twitch-tv-standalone",
+  "version": "1.0.0",
+  "description": "A standalone app for Twitch.Tv.",
+  "main": "index.js",
+  "repository": "https://github.com/K4rakara/dotfiles",
+  "author": "Jack Johannesen",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^10.0.0",
+    "electron-builder": "^22.8.0"
+  },
+  "build": {
+    "appId": "com.karakara.twitch",
+    "productName": "Twitch.tv",
+    "files": [
+      "./index.js"
+    ]
+  },
+  "dependencies": {}
+}

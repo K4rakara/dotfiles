@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Twitch.tv
+Comment=The world's leading live streaming platform.
+Exec=twitch
+Icon=twitch
+Type=Application
+Categories=Video;AudioVideo;Network;
