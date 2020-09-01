@@ -1,0 +1,254 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[kawaii-dracula-elevation]
+0 = #111111 
+1 = #222222
+2 = #333333
+3 = #444444
+
+
+[kawaii-dracula-text]
+_1 = #999999
+0 = #aaaaaa
+1 = #bbbbbb
+2 = #cccccc
+3 = #eeeeee
+
+
+[kawaii-dracula-red]
+0 = #FF3030
+1 = #FF5555
+2 = #FF7070
+
+
+[kawaii-dracula-orange]
+0 = #ff984c
+1 = #ffb86c
+2 = #ffd88c
+
+
+[kawaii-dracula-yellow]
+0 = #edf66c
+1 = #F1FA8C
+2 = #f4fdac
+
+
+[kawaii-dracula-green]
+0 = #30fa5b
+1 = #50fa7b
+2 = #70fa9b
+
+
+[kawaii-dracula-blue]
+0 = #2265f4
+1 = #4285f4
+2 = #62a5f4
+
+
+[bar/kawaii-dracula]
+bottom = true
+fixed-center = false
+offset-x = 8
+offset-y = 8
+width = 100%:-16
+height = 32
+padding-left = 2
+padding-right = 2
+radius = 16.0
+
+line-size = 2
+
+background = ${kawaii-dracula-elevation.1}
+foreground = ${kawaii-dracula-text.0}
+
+font-0 = "Roboto:size=12;2"
+font-1 = "Noto Sans CJK JP:size=12;3"
+font-2 = "Material Design Icons:size=16;4"
+font-3 = "Weather Icons:size=12;5"
+
+modules-left = menu bspwm i3
+modules-center = mpd
+modules-right = screenshot spacer pulseaudio divider cpu memory spacer wlan eth divider weather divider date
+
+
+[module/spacer]
+type = custom/text
+content = "  "
+
+
+[module/divider]
+type = custom/text
+content = "  %{F#444444}|%{F-}  "
+
+
+[module/menu]
+type = custom/script
+interval = 99999
+exec = ~/.config/polybar/menu/label.sh
+
+format-padding = 2
+format-foreground = ${kawaii-dracula-blue.1}
+
+click-left = ~/.config/polybar/menu/main.sh
+cusor-click = hover
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-background = ${kawaii-dracula-elevation.2}
+label-focused-underline= ${kawaii-dracula-blue.1}
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-padding = 2
+
+label-urgent = %name%
+label-urgent-background = ${kawaii-dracula-red.1}
+label-urgent-padding = 2
+
+label-empty = %name%
+label-empty-foreground = ${kawaii-dracula-elevation.3}
+label-empty-padding = 2
+
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+
+format-online = "<label-song>  %{F#444444}|%{F-}  <label-time> <icon-prev> <toggle> <icon-next>"
+
+label-song = %{F#4285f4}󰎆%{F-} %album-artist% -- %title%
+
+format-offline = <label-offline>
+format-offline-foreground = ${kawaii-dracula-elevation.3}
+
+label-offline = 󰎆 MPD is offline.
+
+icon-play = 󰐊
+icon-pause = 󰏤
+icon-prev = 󰒮
+icon-next = 󰒭
+
+
+[module/screenshot]
+type = custom/text
+content = 󰹑
+click-left = flameshot gui
+
+
+[module/pulseaudio]
+type = custom/script
+interval = 2.5
+exec = ~/.config/polybar/pulse-volume.sh
+
+click-left = ~/.config/polybar/pulse.sh
+click-right = ~/.config/polybar/pulse.sh
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2.5
+
+format = <label>
+format-underline = ${kawaii-dracula-red.1}
+
+label = 󰘚 %percentage:02%%
+
+
+[module/memory]
+type = internal/memory
+internal = 2.5
+
+format = <label>
+format-underline = ${kawaii-dracula-yellow.1}
+
+label = 󰍛 %percentage_used:02%%
+
+
+[module/temperature]
+type = internal/temperature
+internal = 2.5
+
+format = <label>
+
+label = 󰔏 %temperature-f%°
+
+format-warn = <label-warn>
+
+label-warn = 󰸁 %temperature-f%°
+label-warn-foreground = ${kawaii-dracula-orange.1}
+
+
+[module/wlan]
+type = internal/network
+interface = wlan1
+interval = 5.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected-format = <ramp-signal> %essid%
+
+ramp-signal-0 = 󰤯
+ramp-signal-1 = 󰤟
+ramp-signal-2 = 󰤢
+ramp-signal-3 = 󰤨
+ramp-signal-foreground = ${kawaii-dracula-blue.1}
+
+label-disconnected-format = 󰤭
+label-disconnected-foreground = ${kawaii-dracula-text.0}
+
+
+[module/eth]
+type = internal/network
+interface = enp8s0
+interval = 5.0
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected = 󰈀
+label-connected-foreground = ${kawaii-dracula-green.1}
+
+label-disconnected = 󰈀
+label-disconnected-foreground = ${kawaii-dracula-text.0}
+
+
+[module/weather]
+type = custom/script
+interval = 300
+exec = ~/.config/polybar/weather.sh
+
+format = <label>
+
+label = %output%
+
+
+[module/date]
+type = custom/script
+interval = 3
+exec = ~/.config/polybar/date.sh short
+
+format = <label>
+
+label = %output%
+
