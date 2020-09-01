@@ -12,10 +12,9 @@ MUTED=$(pacmd list-sinks \
   | head -n $(( $CURRENT_SINK + 1 )) \
   | tail -n 1);
 if [[ $MUTED = "no" ]]; then
-  VOLUME_PC=$(((CURRENT_VOLUME + 0.0) / 100.0));
-  if [ VOLUME_PC -gt 0.5 ]; then
+  if [ $CURRENT_VOLUME -gt 50 ]; then
     echo "󰕾";
-  elif [ VOLUME_PC -gt 0.25 ]; then
+  elif [ $CURRENT_VOLUME -gt 25 ]; then
     echo "󰖀";
   else
     echo "󰕿";
