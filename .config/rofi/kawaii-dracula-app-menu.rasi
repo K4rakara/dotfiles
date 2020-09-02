@@ -1,1 +1,132 @@
-/home/jack/devel/kawaii-dracula/src/rofi/kawaii-dracula-app-menu.rasi
+configuration {
+	display-drun: "󰀻 Applications";
+	display-run: "🔍";
+	display-window: "📺";
+	display-ssh: "~#";
+	show-icons: true;
+	sidebar-mode: false;
+	font: "Roboto 12";
+}
+
+* {
+	text-color: @foreground;
+	active-background: #4285f4;
+	active-foreground: #cccccc;
+	normal-background: @background;
+	normal-foreground: @foreground;
+	urgent-background: #FF5555;
+	urgent-foreground: #cccccc;
+	alternate-active-background: @active-background;
+	alternate-active-foreground: @active-foreground;
+	alternate-normal-background: @background;
+	alternate-normal-foreground: @foreground;
+	alternate-urgent-background: @urgent-background;
+	alternate-urgent-foreground: @urget-foreground;
+	selected-active-background: #4295ff;
+	selected-active-foreground: #eeeeee;
+	selected-normal-background: #444444;
+	selected-normal-foreground: #bbbbbb;
+	selected-urgent-background: #FF7070;
+	selected-urgent-foreground: #eeeeee;
+	background-color: #222222;
+	background: #333333;
+	foreground: #aaaaaa;
+	spacing: 16;
+}
+
+window {
+	location: south west;
+	anchor: south west;
+	height: 400;
+	width: 25%;
+	padding: 8px 8px 8px 8px;
+	orientation: vertical;
+	hide-scrollbar: true;
+	children: [mainbox];
+	border-radius: 1em;
+	background: rgba(0,0,0,0%);
+}
+
+mainbox {
+	spacing: 0.2em;
+	children: [inputbar, listview];
+}
+
+listview {
+	spacing: 0.6em;
+	dynamic: false;
+	cycle: true;
+	padding: 0px 5px 0px 5px;
+}
+
+inputbar {
+	border-radius: 50%;
+	padding: 5px;
+	border-spacing: 5px 0 0 0;
+	spacing: 10px;
+	margin: 5px 0 10px;
+}
+
+entry{
+	padding: 4px;
+}
+
+
+prompt{
+	padding: 5px;
+	text-color: #cccccc;
+	border: 1px;
+	border-radius: 50%;
+}
+
+
+element {
+	padding: 10px;
+	border-radius: 50%;
+}
+
+element normal.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element normal.urgent {
+	background-color: @urgent-background;
+	text-color: @urgent-foreground;
+}
+
+element normal.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}
+
+element selected.normal {
+	background-color: @selected-normal-background;
+	text-color: @selected-normal-foreground;
+	border-color: @active-background;
+}
+
+element selected.urgent {
+	background-color: @selected-urgent-background;
+	text-color: @selected-urgent-foreground;
+}
+
+element selected.active {
+	background-color: @selected-active-background;
+	text-color: @selected-active-foreground;
+}
+
+element alternate.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element alternate.urgent {
+	background-color: @urgent-background;
+	text-color: @urgent-foreground;
+}
+
+element alternate.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}
