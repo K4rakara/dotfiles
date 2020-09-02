@@ -1,0 +1,55 @@
+schemes:
+  kawaii_dracula: &kawaii_dracula
+    primary:
+      background: "#222222"
+      foreground: "#aaaaaa"
+
+      dim_background: "#111111"
+      dim_foreground: "#888888"
+      bright_background: "#333333"
+      bright_foreground: "#cccccc"
+
+    cursor:
+      text: "#111111"
+      curor: "#cccccc"
+
+    normal:
+      black:   "#222222"
+      red:     "#FF5555"
+      green:   "#50fa7b"
+      yellow:  "#F1FA8C"
+      blue:    "#4285f4"
+      magenta: "#bd93f9"
+      cyan:    "#8be9fd"
+      white:   "#aaaaaa"
+
+    dim:
+      black:   "#111111"
+      red:     "#ff3030"
+      green:   "#30fa5b"
+      yellow:  "#edf66c"
+      blue:    "#2265f4"
+      magenta: "#9d73f9"
+      cyan:    "#6bc9fd"
+      white:   "#888888"
+
+    bright:
+      black:   "#333333"
+      red:     "#ff7070"
+      green:   "#70fa9b"
+      yellow:  "#f4fdac"
+      blue:    "#62a5f4"
+      magenta: "#dd93f9"
+      cyan:    "#abfdfd"
+      white:   "#cccccc"
+
+colors: *kawaii_dracula
+
+font:
+  normal:
+    family: "Fira Code"
+  bold:
+    family: "Fira Code"
+  italic:
+    family: "Fira Code"
+
