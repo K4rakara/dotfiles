@@ -6,3 +6,7 @@
 
 ln -s -f $PWD/.vim/autoload ~/.vim/autoload;
 
+[ -d ~/.vim/plugged/dracula/autoload/ ] || mkdir -p ~/.vim/plugged/dracula/autoload/;
+
+cp $PWD/.vim/dracula.vim ~/.vim/plugged/dracula/autoload/dracula.vim;
+
