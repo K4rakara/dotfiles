@@ -167,7 +167,7 @@ case "$MENU" in
     # The "nice" names of output devices.
     PRODUCT_NAMES=$(pactl list \
       | grep -A48 'Source #' \
-      | grep -e"device.product.name = " \
+      | grep -e"device.description = " \
       | cut -d"=" -f2 \
       | cut -d"\"" -f2);
     # The internal names of output devices.
