@@ -1,0 +1,89 @@
+@use "sass:map";
+@use "sass:list";
+
+@function elevation($i, $v: "") {
+  $_: (
+    ( "dim": #090909, "": #111111, "bright": #1a1a1a, ),
+    ( "dim": #1a1a1a, "": #222222, "bright": #2b2b2b, ),
+    ( "dim": #2b2b2b, "": #333333, "bright": #3c3c3c, ),
+  );
+  $c: list.nth($_, $i + 1);
+  @if $c {
+    $_c: $c;
+    $c: map.get($c, $v);
+    @if $c {
+      @return $c;
+    } @else {
+      $c: map.get($_c, "");
+      @if $c {
+        @return $c;
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using default variant.";
+      } @else {
+        @return #ff0000;
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using fallback.";
+      }
+    }
+  } @else {
+    @return #ff0000;
+  }
+}
+
+@function text($i, $v: "") {
+  $_: (
+    ( "dim": #a2a2a2, "": #aaaaaa, "bright": #b3b3b3, ),
+    ( "dim": #b3b3b3, "": #bbbbbb, "bright": #c4c4c4, ),
+    ( "dim": #c4c4c4, "": #cccccc, "bright": #e5c5c5, ),
+    ( "dim": #e5e5e5, "": #eeeeee, "bright": #f6f6f6, ),
+  );
+  $c: list.nth($_, $i + 1);
+  @if $c {
+    $_c: $c;
+    $c: map.get($c, $v);
+    @if $c {
+      @return $c;
+    } @else {
+      $c: map.get($_c, "");
+      @if $c {
+        @return $c;
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using default variant.";
+      } @else {
+        @return #ff0000;
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using fallback.";
+      }
+    }
+  } @else {
+    @return #ff0000;
+  }
+}
+
+@function palette($c, $v: "") {
+  $_: (
+    "red":    ( "dim": #FF3030, "": #FF5555, "bright": #FF7070, ),
+    "orange": ( "dim": #ff984c, "": #ffb86c, "bright": #ffd88c, ),
+    "yellow": ( "dim": #edf66c, "": #F1FA8C, "bright": #f4fdac, ),
+    "green":  ( "dim": #30fa5b, "": #50fa7b, "bright": #70fa9b, ),
+    "cyan":   ( "dim": #6bc9fd, "": #8be9fd, "bright": #abfdfd, ),
+    "blue":   ( "dim": #2265f4, "": #4285f4, "bright": #62a5f4, ),
+    "purple": ( "dim": #9d73f9, "": #bd93f9, "bright": #ddb3f9, ),
+    "pink":   ( "dim": #ff59a6, "": #ff79c6, "bright": #ff99e6, ),
+  );
+  $c: map.get($_, $c);
+  @if $c != null {
+    $_c: $c; 
+    $c: map.get($c, $v);
+    @if $c {
+      @return $c; 
+    } @else {
+      $c: map.get($_c, "");
+      @if $c {
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using default variant.";
+        @return $c;
+      } @else {
+        @warn "Invalid variant \"" + $v + "\". Expected \"dim\" or \"bright\". Using fallback.";
+        @return #ff0000;
+      }
+    }
+  } @else {
+    @return #ff0000;
+  }
+}

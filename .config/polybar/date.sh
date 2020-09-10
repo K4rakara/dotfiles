@@ -68,7 +68,7 @@ fi;
 
 dom=`date +%d`;
 
-if [[ $dom -gt 20 ]]; then
+if [ $dom -gt 20 ]; then
   case "${dom:$((${#dom}-1))}" in
     1 ) dom+="st" ;;
     2 ) dom+="nd" ;;

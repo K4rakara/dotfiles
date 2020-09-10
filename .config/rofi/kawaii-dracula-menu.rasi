@@ -43,6 +43,8 @@ window {
 	orientation: vertical;
 	hide-scrollbar: true;
 	children: [mainbox];
+	border: 4px 4px;
+	border-color: #111111;
 	border-radius: 1em;
 	background: rgba(0,0,0,0%);
 }

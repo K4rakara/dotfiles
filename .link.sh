@@ -45,6 +45,7 @@ echo -e "Working...";
 
 # Link top level config files.
 ln -s -f $PWD/.vimrc ~/.vimrc;
+ln -s -f $PWD/.xinitrc ~/.xinitrc;
 ln -s -f $PWD/.zshrc ~/.zshrc;
 ln -s -f $PWD/.zprofile ~/.zprofile;
 

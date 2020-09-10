@@ -1,0 +1,29 @@
+.tabbrowser-tab {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  overflow: hidden;
+}
+.tabbrowser-tab > .tab-stack > .tab-background {
+  background-image: none;
+  background-color: transparent;
+}
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-line {
+  background-color: #222222 !important;
+  transform: scaleX(0%) !important;
+}
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-line[selected] {
+  transform: scaleX(0%) !important;
+}
+.tabbrowser-tab:hover > .tab-stack > .tab-background {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+.tabbrowser-tab:hover > .tab-stack > .tab-background > .tab-line {
+  transform: scaleX(88%) !important;
+}
+.tabbrowser-tab[selected] > .tab-stack > .tab-background {
+  background-color: var(--lwt-selected-tab-background-color, #222222) !important;
+}
+.tabbrowser-tab[selected] > .tab-stack > .tab-background > .tab-line {
+  background-color: #333333 !important;
+}
