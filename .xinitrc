@@ -32,6 +32,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# XDG
+export XDG_CONFIG_HOME=$HOME/.config/
+export XDG_DATA_HOME=$HOME/.local/share/
+
 # Set QT theme.
 export QT_QPA_PLATFORMTHEME=qt5ct
 
@@ -52,3 +56,4 @@ nohup polybar kawaii-dracula > /dev/null &
 
 # Start window manager.
 bspwm
+# awesome

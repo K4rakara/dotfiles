@@ -11,6 +11,19 @@ if context ~= nil then
 		..reset())
 end
 
+-- Host
+if host ~= nil then
+	print(""
+		.." 󰇅  "
+		..bold()
+		..blue()
+		.."Host"
+		..reset()
+		..": "
+		..string.rep(" ", 16 - 10)
+		..host.model)
+end
+
 -- OS
 if distro ~= nil then
 	print(""
@@ -135,16 +148,32 @@ end
 
 -- Resolution
 if resolution ~= nil then
-	print(""
-		.." 󰍹  "
-		..bold()
-		..blue()
-		.."Resolution"
-		..reset()
-		..": "
-		..resolution.width
-		.."x"
-		..resolution.height)
+	if resolution.refresh ~= nil then
+		print(""
+			.." 󰍹  "
+			..bold()
+			..blue()
+			.."Resolution"
+			..reset()
+			..": "
+			..resolution.width
+			.."x"
+			..resolution.height
+			.." @ "
+			..resolution.refresh
+			.."Hz")
+	else
+		print(""
+			.." 󰍹  "
+			..bold()
+			..blue()
+			.."Resolution"
+			..reset()
+			..": "
+			..resolution.width
+			.."x"
+			..resolution.height)
+	end
 end
 
 -- DE
@@ -231,6 +260,21 @@ print(""
 	..": "
 	..string.rep(" ", 16 - 9)
 	.."MSI ARMOR Radeon RX 570")
+
+-- Motherboard
+if motherboard ~= nil then
+	print(""
+		.." 󰐿  "
+		..bold()
+		..blue()
+		.."Board"
+		..reset()
+		..": "
+		..string.rep(" ", 16 - 11)
+		..motherboard.vendor
+		.." "
+		..motherboard.name)
+end
 
 -- Memory
 if memory ~= nil then

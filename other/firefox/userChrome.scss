@@ -7,12 +7,40 @@
   overflow: hidden;
   & > .tab-stack {
     & > .tab-background {
+	  transition-property: background-color, visibility !important;
+	  transition-duration: .25s !important;
+	  transition-timing-function: ease-out !important;
 	  background-image: none;
 	  background-color: transparent;
 	  & > .tab-line {
-		background-color: _.elevation(1) !important;
 		transform: scaleX(0%) !important;
-	    &[selected] { transform: scaleX(0%) !important; }
+		transition-property: background-color, transform, visibility !important;
+		transition-duration: .25s !important;
+		transition-timing-function: ease-out !important;
+		background-color: _.elevation(1) !important;
+	    &[selected] { transform: scaleX(88%) !important; }
+	  }
+	}
+	& > .tab-content {
+	  & > .tab-label-container {
+		& > .tab-label {
+		  transition-property: color, visibility !important;
+		  transition-duration: .25s !important;
+		  transition-timing-function: ease-out !important;
+		  color: _.text(0) !important;
+		}
+	  }
+	  & > image.tab-close-button {
+		width: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+		height: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+		padding: var(--toolbarbutton-inner-padding);
+		border-radius: 50% !important;
+		overflow: hidden;
+		transition-property: fill, background-color, visibility !important;
+		transition-duration: .25s !important;
+		transition-timing-function: ease-out !important;
+		fill: _.text(0) !important;
+		list-style-image: url("icons/close.svg") !important;
 	  }
 	}
   }
@@ -25,17 +53,203 @@
 		  transform: scaleX(88%) !important;
 		}
 	  }
+	  & > .tab-content {
+		& > .tab-label-container {
+		  & > .tab-label {
+			color: _.text(1) !important;
+		  }
+		}
+		& > image.tab-close-button:hover {
+		  fill: _.text(1) !important;
+		  background-color: _.elevation(1) !important;
+		}
+	  }
 	}
   }
   &[selected] {
     & > .tab-stack {
 	  & > .tab-background {
 	    background-color: var(--lwt-selected-tab-background-color, _.elevation(1)) !important;
-	    & > .tab-line {
-		  background-color: _.elevation(2) !important;
+		& > .tab-line {
+			background-color: var(--tab-line-color) !important;
+		}
+	  }
+	  & > .tab-content {
+		& > .tab-label-container {
+          & > .tab-label {
+			color: _.text(2) !important;
+		  }
+		}
+		& > image.tab-close-button {
+		  fill: _.text(2) !important;
+		  &:hover {
+			fill: _.text(3) !important;
+		    background-color: _.elevation(2) !important;
+		  }
 		}
 	  }
     }
+	&:hover {
+	  & > .tab-stack {
+		& > .tab-content {
+		  & > .tab-label-container {
+			& > .tab-label {
+			  color: _.text(3) !important;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
+
+// New tab button
+#tabs-newtab-button {
+  & image {
+    border-radius: 50% !important;
+    overflow: hidden;
+	transition-property: fill, background-color !important;
+    transition-duration: .25s;
+	transition-timing-function: ease-out;
+	fill: _.text(2) !important;
+  	list-style-image: url("icons/plus.svg") !important;
+  }
+  &:hover {
+    & image {
+	  fill: _.text(3) !important;
+      background-color: _.elevation(1) !important;
+	}
+  }
+}
+
+// Back button
+#back-button {
+  padding: 0 var(--toolbarbutton-outer-padding);
+  & image {
+	width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	border: none !important;
+	border-radius: 50% !important;
+	padding: var(--toolbarbutton-inner-padding) !important;
+	overflow: hidden;
+	transition-property: fill, background-color !important;
+	transition-duration: .25s;
+	transition-timing-function: ease-out;
+	fill: _.text(2) !important;
+	list-style-image: url("icons/back.svg") !important;
+  	background-color: transparent !important;
+	box-shadow: none !important;
+  }
+  &:hover:not([disabled]) {
+	& image {
+      fill: _.text(3) !important;
+	  background-color: _.elevation(2) !important;
+	}
+  }
+}
+
+// Forwards button
+#forward-button {
+  padding: 0 var(--toolbarbutton-outer-padding);
+  & image {
+	width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	border: none !important;
+	border-radius: 50% !important;
+	overflow: hidden;
+	transition-property: fill, background-color !important;
+	transition-duration: .25s;
+	transition-timing-function: ease-out;
+	fill: _.text(2) !important;
+	list-style-image: url("icons/forward.svg") !important;
+  	background-color: transparent !important;
+	box-shadow: none !important;
+  }
+  &:hover:not([disabled]) {
+	& image {
+      fill: _.text(3) !important;
+	  background-color: _.elevation(2) !important;
+	}
+  }
+}
+
+// Refresh/Stop refreshing button
+#stop-reload-button {
+  #reload-button {
+	list-style-image: url("icons/refresh.svg") !important;
+    & image {
+      border-radius: 50% !important;
+	  overflow: hidden;
+	  transition-property: fill, background-color !important;
+	  transition-duration: .25s;
+	  transition-timing-function: ease-out;
+	  fill: _.text(2) !important;
+    }
+    &:hover {
+	  & image {
+        fill: _.text(3) !important;
+	    background-color: _.elevation(2) !important;
+	  }
+    }
+  }
+  #stop-button {
+	list-style-image: url("icons/close.svg") !important;
+    & image {
+      border-radius: 50% !important;
+	  overflow: hidden;
+	  transition-property: fill, background-color !important;
+	  transition-duration: .25s;
+	  transition-timing-function: ease-out;
+	  fill: _.text(2) !important;
+    }
+    &:hover {
+	  & image {
+        fill: _.text(3) !important;
+	    background-color: _.elevation(2) !important;
+	  }
+    }
+  }
+}
+
+// Home button
+#home-button {
+  & image {
+	border-radius: 50% !important;
+	overflow: hidden;
+	transition-property: fill, background-color !important;
+	transition-duration: .25s;
+	transition-timing-function: ease-out;
+	fill: _.text(2) !important;
+	list-style-image: url("icons/home.svg") !important;
+  }
+  &:hover {
+	& image {
+      fill: _.text(3) !important;
+	  background-color: _.elevation(2) !important;
+	}
+  }
+}
+
+// URL bar
+#urlbar-container {
+  & #urlbar-background { background-color: _.elevation(2) !important; }
+  & #urlbar-input-container {
+    & #tracking-protection-icon-container {
+      & > #tracking-protection-icon-box {
+		& > image {
+		  transform: none !important;
+          background-position: center !important;
+		  background-size: contain !important;
+		  background-image: url("icons/normal.svg") !important;
+		  list-style-image: none !important;
+	    }
+		&:not([hasException])[active] {
+		  & image {
+			background-image: url("icons/protected.svg") !important;
+		  }
+		}
+	  }
+	}
   }
 }
 

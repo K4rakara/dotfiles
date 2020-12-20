@@ -4,7 +4,7 @@ print(down(math.floor((artHeight / 8)) - 2))
 
 print("  "..string.gsub(art, "\n", "\n  "))
 
-print(up(artHeight + math.floor(artHeight / 4)))
+print(up(artHeight + math.floor(artHeight / 8)))
 
 print(""
 	..right(artWidth + 4)

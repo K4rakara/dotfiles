@@ -4,15 +4,39 @@
   overflow: hidden;
 }
 .tabbrowser-tab > .tab-stack > .tab-background {
+  transition-property: background-color, visibility !important;
+  transition-duration: 0.25s !important;
+  transition-timing-function: ease-out !important;
   background-image: none;
   background-color: transparent;
 }
 .tabbrowser-tab > .tab-stack > .tab-background > .tab-line {
-  background-color: #222222 !important;
   transform: scaleX(0%) !important;
+  transition-property: background-color, transform, visibility !important;
+  transition-duration: 0.25s !important;
+  transition-timing-function: ease-out !important;
+  background-color: #222222 !important;
 }
 .tabbrowser-tab > .tab-stack > .tab-background > .tab-line[selected] {
-  transform: scaleX(0%) !important;
+  transform: scaleX(88%) !important;
+}
+.tabbrowser-tab > .tab-stack > .tab-content > .tab-label-container > .tab-label {
+  transition-property: color, visibility !important;
+  transition-duration: 0.25s !important;
+  transition-timing-function: ease-out !important;
+  color: #aaaaaa !important;
+}
+.tabbrowser-tab > .tab-stack > .tab-content > image.tab-close-button {
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+  height: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+  padding: var(--toolbarbutton-inner-padding);
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color, visibility !important;
+  transition-duration: 0.25s !important;
+  transition-timing-function: ease-out !important;
+  fill: #aaaaaa !important;
+  list-style-image: url("icons/close.svg") !important;
 }
 .tabbrowser-tab:hover > .tab-stack > .tab-background {
   background-image: none !important;
@@ -21,9 +45,147 @@
 .tabbrowser-tab:hover > .tab-stack > .tab-background > .tab-line {
   transform: scaleX(88%) !important;
 }
+.tabbrowser-tab:hover > .tab-stack > .tab-content > .tab-label-container > .tab-label {
+  color: #bbbbbb !important;
+}
+.tabbrowser-tab:hover > .tab-stack > .tab-content > image.tab-close-button:hover {
+  fill: #bbbbbb !important;
+  background-color: #222222 !important;
+}
 .tabbrowser-tab[selected] > .tab-stack > .tab-background {
   background-color: var(--lwt-selected-tab-background-color, #222222) !important;
 }
 .tabbrowser-tab[selected] > .tab-stack > .tab-background > .tab-line {
+  background-color: var(--tab-line-color) !important;
+}
+.tabbrowser-tab[selected] > .tab-stack > .tab-content > .tab-label-container > .tab-label {
+  color: #cccccc !important;
+}
+.tabbrowser-tab[selected] > .tab-stack > .tab-content > image.tab-close-button {
+  fill: #cccccc !important;
+}
+.tabbrowser-tab[selected] > .tab-stack > .tab-content > image.tab-close-button:hover {
+  fill: #dddddd !important;
   background-color: #333333 !important;
+}
+.tabbrowser-tab[selected]:hover > .tab-stack > .tab-content > .tab-label-container > .tab-label {
+  color: #dddddd !important;
+}
+
+#tabs-newtab-button image {
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+  list-style-image: url("icons/plus.svg") !important;
+}
+#tabs-newtab-button:hover image {
+  fill: #dddddd !important;
+  background-color: #222222 !important;
+}
+
+#back-button {
+  padding: 0 var(--toolbarbutton-outer-padding);
+}
+#back-button image {
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  padding: var(--toolbarbutton-inner-padding) !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+  list-style-image: url("icons/back.svg") !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+#back-button:hover:not([disabled]) image {
+  fill: #dddddd !important;
+  background-color: #333333 !important;
+}
+
+#forward-button {
+  padding: 0 var(--toolbarbutton-outer-padding);
+}
+#forward-button image {
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+  list-style-image: url("icons/forward.svg") !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+#forward-button:hover:not([disabled]) image {
+  fill: #dddddd !important;
+  background-color: #333333 !important;
+}
+
+#stop-reload-button #reload-button {
+  list-style-image: url("icons/refresh.svg") !important;
+}
+#stop-reload-button #reload-button image {
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+}
+#stop-reload-button #reload-button:hover image {
+  fill: #dddddd !important;
+  background-color: #333333 !important;
+}
+#stop-reload-button #stop-button {
+  list-style-image: url("icons/close.svg") !important;
+}
+#stop-reload-button #stop-button image {
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+}
+#stop-reload-button #stop-button:hover image {
+  fill: #dddddd !important;
+  background-color: #333333 !important;
+}
+
+#home-button image {
+  border-radius: 50% !important;
+  overflow: hidden;
+  transition-property: fill, background-color !important;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  fill: #cccccc !important;
+  list-style-image: url("icons/home.svg") !important;
+}
+#home-button:hover image {
+  fill: #dddddd !important;
+  background-color: #333333 !important;
+}
+
+#urlbar-container #urlbar-background {
+  background-color: #333333 !important;
+}
+#urlbar-container #urlbar-input-container #tracking-protection-icon-container > #tracking-protection-icon-box > image {
+  transform: none !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-image: url("icons/normal.svg") !important;
+  list-style-image: none !important;
+}
+#urlbar-container #urlbar-input-container #tracking-protection-icon-container > #tracking-protection-icon-box:not([hasException])[active] image {
+  background-image: url("icons/protected.svg") !important;
 }

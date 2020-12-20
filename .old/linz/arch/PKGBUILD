@@ -15,13 +15,13 @@ source=("git://github.com/K4rakara/dotfiles.git")
 md5sums=('SKIP')
 
 build() {
-	cd dotfiles/linz
+	cd $srcdir/../../
 	make
 }
 
 package() {
 	mkdir -p $pkgdir/usr/bin/
-	cp $srcdir/dotfiles/linz/linz $pkgdir/usr/bin/
+	cp $srcdir/../../linz $pkgdir/usr/bin/
 	chown root:root $pkgdir/usr/bin/linz
 	chmod a+x $pkgdir/usr/bin/linz
 }

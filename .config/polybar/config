@@ -105,7 +105,7 @@ exec = ~/.config/polybar/menu/label.sh
 format-padding = 2
 format-foreground = ${kawaii-dracula-blue.1}
 
-click-left = ~/.config/polybar/menu/main.sh
+click-left = nohup launcher > /dev/null &
 cusor-click = hover
 
 
@@ -235,8 +235,8 @@ label-disconnected-foreground = ${kawaii-dracula-text.0}
 
 [module/weather]
 type = custom/script
-interval = 300
-exec = ~/.config/polybar/weather.sh
+tail = true
+exec = openweatherbar -u imperial -t
 
 format = <label>
 
@@ -245,8 +245,8 @@ label = %output%
 
 [module/date]
 type = custom/script
-interval = 3
-exec = ~/.config/polybar/date.sh short
+tail = true
+exec = timebar tail
 
 format = <label>
 

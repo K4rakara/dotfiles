@@ -43,6 +43,9 @@ lsr() {
 
 echo -e "Working...";
 
+# Save this directories name to a file in the home directory.
+echo $PWD > ~/.dotfiles-directory;
+
 # Link top level config files.
 ln -s -f $PWD/.vimrc ~/.vimrc;
 ln -s -f $PWD/.xinitrc ~/.xinitrc;

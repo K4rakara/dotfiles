@@ -6,6 +6,8 @@
     ( "dim": #090909, "": #111111, "bright": #1a1a1a, ),
     ( "dim": #1a1a1a, "": #222222, "bright": #2b2b2b, ),
     ( "dim": #2b2b2b, "": #333333, "bright": #3c3c3c, ),
+	( "dim": #3c3c3c, "": #444444, "bright": #4e4e4e, ),
+	( "dim": #4e4e4e, "": #555555, "bright": #5f5f5f, ),
   );
   $c: list.nth($_, $i + 1);
   @if $c {
@@ -32,8 +34,8 @@
   $_: (
     ( "dim": #a2a2a2, "": #aaaaaa, "bright": #b3b3b3, ),
     ( "dim": #b3b3b3, "": #bbbbbb, "bright": #c4c4c4, ),
-    ( "dim": #c4c4c4, "": #cccccc, "bright": #e5c5c5, ),
-    ( "dim": #e5e5e5, "": #eeeeee, "bright": #f6f6f6, ),
+    ( "dim": #c4c4c4, "": #cccccc, "bright": #d5d5d5, ),
+    ( "dim": #d5d5d5, "": #dddddd, "bright": #e6e6e6, ),
   );
   $c: list.nth($_, $i + 1);
   @if $c {

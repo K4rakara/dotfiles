@@ -1,0 +1,273 @@
+@use "../../other/palette.scss" as _;
+@use "sass:color";
+/*IMPORT INLINE "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/dracula.min.css"*/
+
+$material-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+$material-shadow-raised: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+$material-shadow-thicc: 0px 3px 6px 12px rgba(0, 0, 0, 0.2), 0px 2px 48px 24px rgba(0, 0, 0, 0.14), 0px 1px 120px 24px rgba(0, 0, 0, 0.12);
+
+:root {
+  --header-primary: #{_.text(3)};
+  --header-secondary: #{_.text(2)};
+  --text-normal: #{_.text(0)};
+  --text-muted: #888888;
+  --text-link: #{_.palette("blue")};
+  --channels-default: #{_.text(0)};
+  --interactive-normal: #{_.text(0)};
+  --interactive-hover: #{_.text(1)};
+  --interactive-active: #{_.text(2)};
+  --interactive-muted: #888888;
+  --background-primary: #{_.elevation(1)};
+  --background-secondary: #{_.elevation(2)};
+  --background-secondary-alt: #{_.elevation(2)};
+  --background-tertiary: transparent;
+  --background-accent: #{_.elevation(3)};
+  --background-floating: #{_.elevation(3)};
+  --background-mobile-primary: #{_.elevation(1)};
+  --background-mobile-secondary: #{_.elevation(2)};
+  --background-modifier-hover: #{color.change(_.elevation(0), $alpha: 0.11)};
+  --background-modifier-active: #{color.change(_.elevation(0), $alpha: 0.22)};
+  --background-modifier-selected: #{color.change(_.elevation(0), $alpha: 0.22)};
+  --background-modifier-accent: #{color.change(_.text(1), $alpha: 0.11)};
+  --background-mentioned: #{color.change(_.palette("orange"), $alpha: 0.11)};
+  --background-mentioned-hover: #{color.change(_.palette("orange"), $alpha: 0.14)};
+  --background-message-hover: #{color.change(_.elevation(0), $alpha: 0.11)};
+  --scrollbar-thin-thumb: #{_.elevation(0)};
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: #{_.elevation(0)};
+  --scrollbar-auto-track: transparent;
+  --scrollbar-auto-scrollbar-color-thumb: #{_.elevation(0)};
+  --scrollbar-auto-scrollbar-color-track: transparent;
+  --channeltextarea-background: #{_.elevation(2)};
+}
+
+body {
+  & [class^="app"] {
+    & [class^="app"] {
+      & [class^="bg"] { background-color: _.elevation(0); }
+	  & [class^="layers"] {
+        & [class^="layer"] {
+          & [class^="container"] {
+			// Sidebar.
+            & [class^="wrapper"] {}
+			// Main content.
+			& [class^="base"] {
+              & [class^="content"] {
+                & [class^="sidebar"] {
+                  border-top-left-radius: 16px;
+				  border-bottom-left-radius: 16px;
+				}
+				& [class^="chat"] {
+                  & section[class^="title"] {
+                    background-color: var(--background-secondary);
+					& [class^="children"] {
+                      &:after {
+					    background: linear-gradient(90deg,rgba(54,57,63,0) 0,var(--background-secondary));
+					  }
+					}
+					& [class^="toolbar"] {
+					  & a { display: none; }
+					}
+				  }
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
+
+  // Sidebar Styles.
+
+  & [class^="folder"] {
+    & [class^="folderIconWrapper"] {
+      background-color: _.elevation(1) !important;
+	  & [class^="closedFolderIconWrapper"] {
+        //& [class^="icon"] { filter: blur(1px); }
+	  }
+	}
+  }
+
+  & [class^="expandedFolderBackground"] {
+    background-color: _.elevation(1) !important;
+  } 
+
+  // Messages / General Chat Styles.
+
+  & [class^="newMessagesBar"] {
+    background-color: _.palette("blue", bright);
+  }
+
+  & [class*="isUnread"] {
+    border-color: #{_.palette("red")};
+	& [class*="unreadPill-"] {
+      background-color: _.palette("red");
+	}
+  }
+
+  & [class^="message"] {
+    & [class^="content"] {
+      & [class^="markup"] {
+        & [class^="mention"] {
+          color: _.palette("blue", bright);
+	      background: color.change(_.palette("blue", bright), $alpha: 0.11);
+        }
+        & [class^="blockquoteContainer"] {
+          & [class^="blockquoteDivider"] {
+            background-color: _.elevation(2);
+	      }
+        }
+		& pre {
+		  font-family: 'Fira Code';
+		  & code {
+		    font-family: 'Fira Code';
+
+		  }
+		}
+      }
+    }
+	& [class^="container"] {
+	  & [class^="reaction"] {
+        & div [class*="reactionMe"] {
+          background: color.change(_.palette("blue", bright), $alpha: 0.11);
+	      & [class^="reactionCount"] { color: _.palette("blue", bright); }
+	    }
+	  }
+    }
+  } 
+
+  // Misc. Styles.
+
+  & [fill="#43b581"] { fill: _.palette("green") !important; }
+  & [fill="#faa61a"] { fill: _.palette("orange") !important; }
+  & [fill="#f04747"] { fill: _.palette("red") !important; }
+  & [class*="verified-"] { color: _.palette("green"); }
+  & [class*="partnered-"] { color: _.palette("blue", bright); }
+  & [class*="lookFilled"] {
+    &[class*="colorBrand"] {
+	  background-color: _.palette("blue", bright);
+      &:hover, &:active { background-color: _.palette("blue", bright); }
+	  &:disabled { background-color: _.palette("blue", dim); }
+    }
+	&[class*="colorRed"] {
+      background-color: _.palette("red");
+	  &:hover, &:active { background-color: _.palette("red", bright); }
+	  &:disabled { background-color: _.palette("red", dim); }
+	}
+  }
+  & [class*="lookInverted"] {
+    &[class*="colorBrand"] {
+      color: _.palette("blue", bright);
+	  background-color: _.text(0);
+	  &:hover, &:active {
+	    color: _.palette("blue", bright);
+	    background-color: _.text(1);
+	  }
+	  &:disabled {
+        color: _.palette("blue", dim);
+		background-color: _.text(0);
+	  }
+	}
+	&[class*="colorRed"] {
+      color: _.palette("red");
+	  background-color: _.text(0);
+	  &:hover, &:active {
+        color: _.palette("red", bright);
+		background-color: _.text(1);
+	  }
+	  &:disabled {
+        color: _.palette("red", dim);
+		background-color: _.text(0);
+	  }
+	}
+  }
+  & [class*="lookOutlined"] {
+    &[class*="colorBrand"] {
+      
+	}
+  }
+
+  & [class^="userPopout"] {
+    & [class^="headerNormal"] { background-color: _.elevation(3); }
+	& [class^="headerPlaying"] { background-color: _.palette("blue", bright); }
+	& [class^="body-"] { background-color: _.elevation(2); }
+	& [class^="footer"] {
+	  background-color: _.elevation(2);
+	  & [class^="inputDefault"] {
+	    background-color: _.elevation(3);
+	    &:focus { border-color: _.palette("blue", bright); }
+	  }
+	}
+  }
+ 
+  & div {
+	& [class^="backdrop"] { background-color: transparent !important; }
+	& [class^="backdropWithLayer"] { background: transparent !important; }
+    & [class^="layer"] {
+      & [class^="focusLock"] {
+        & [class^="modal"] {
+	      border-radius: 16px;
+		  box-shadow: $material-shadow-thicc !important;
+		  &[class*="root"] { background-color: _.elevation(3); }
+	      & [class^="wrapper"] {
+            & a[class*="downloadLink"] {
+			  margin-top: 8px;
+              padding: 4px;
+			  border-radius: 16px;
+			  border: var(--elevation-stroke);
+			  opacity: 1;
+              background: _.elevation(3);
+			  box-shadow: var(--elevation-medium);
+			  &:hover {
+				text-decoration: none;
+				background: _.palette("blue", bright);
+				box-shadow: var(--elevation-high);
+			  }
+			}
+		  }
+        }
+	  } 
+	  & [class^="tooltip"] {
+        &[class*="tooltipBlack"], &[class*="tooltipGrey"] {
+		  background-color: _.elevation(3);
+		  & [class^="tooltipPointer"] { border-top-color: _.elevation(3); }
+	    }
+		&[class*="tooltipBrand"] {
+          background-color: _.palette("blue", bright);
+		  & [class^="tooltipPointer"] { border-top-color: _.palette("blue", bright); }
+		}
+		&[class*="tooltipRed"] {
+          background-color: _.palette("red");
+		  & [class^="tooltipPointer"] { border-top-color: _.palette("red"); }
+		}
+		&[class*="tooltipGreen"] {
+          background-color: _.palette("green");
+		  & [class^="tooltipPointer"] { border-top-color: _.palette("green"); }
+		}
+		&[class*="tooltipYellow"] {
+          background-color: _.palette("yellow");
+		  & [class^="tooltipPointer"] { border-top-color: _.palette("yellow"); }
+		}
+	  }
+	}
+	& [class^="modal"] {
+      & [class^="inner"] {
+        border-radius: 16px;
+		box-shadow: $material-shadow-thicc !important;
+	    & [class^="flex"] {
+		  & [class^="topSectionNormal"] {
+            background-color: _.elevation(3);
+			& div { border-top-color: _.elevation(3); }
+	      }
+		  & [class^="topSectionPlaying"] {
+            background-color: _.palette("blue", bright);
+			& div { border-top-color: _.palette("blue", bright); }
+		  }
+		}
+	  }
+	}
+  }
+}
+
+

@@ -42,6 +42,8 @@ if (process.argv[2] != null)
 						}
 					)
 				).json();
+
+				console.log(res);
 				
 				if (!JSON.stringify(res).includes('Error'))
 					return Promise.resolve();
